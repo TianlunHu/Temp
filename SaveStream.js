@@ -205,11 +205,12 @@ function deviceOrientationHandler (eventData) {
 function OrientationHandler(orientation, OV, t) {
     let info, abcd = '[A, B, C, D]';
     let Q = [orientation.quaternion];
+    let qua = [Q];
 
-    info = abcd.replace("A", Q[0].toFixed(3));
-    info = info.replace("B", Q[1].toFixed(3));
-    info = info.replace("C", Q[2].toFixed(3));
-    info = info.replace("D", Q[3].toFixed(3));
+    info = abcd.replace("A", Q[0]);
+    info = info.replace("B", Q[1]);
+    info = info.replace("C", Q[2]);
+    info = info.replace("D", Q[3]);
     document.getElementById('orSen').innerHTML = info;
     OV.push(info);
     
