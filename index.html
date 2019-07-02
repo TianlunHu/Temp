@@ -79,7 +79,7 @@
         <h2> Take Frame and Record Video with Button </h2>
 
         <video id="gum" playsinline autoplay muted></video>
-        <video id="recorded" playsinline loop></video>
+        <!--<video id="recorded" playsinline loop></video>-->
 
         <br />
         <div class="select">
@@ -88,7 +88,7 @@
         <br />
 
         <button id="record">Start Recording</button>
-        <button id="play" disabled>Play</button>
+        <!--<button id="play" disabled>Play</button>-->
         <button id="download" disabled>Download</button>
         <p>Echo cancellation: <input type="checkbox" id="echoCancellation"></p>
         <span id="errorMsg"></span>
@@ -106,48 +106,36 @@
                 <td id="timeStamp">Current Time</td>
             </tr>
             <tr>
-                <td>linear acceleration (excl. gravity)</td>
-                <td id="moAccel">No Accelermeter</td>
+                <td>Pose Vector</td>
+                <td id="orSen">No Pose Sensor</td>
             </tr>
             <tr>
-                <td>acceleration incl. gravity</td>
-                <td id="moAccelGrav">No Acc-meter with G</td>
+                <td>linear acceleration</td>
+                <td id="moAccel">No Accelermeter</td>
             </tr>
             <tr>
                 <td>rotation rate</td>
                 <td id="moRotation">No Gyroscope</td>
             </tr>
+
+        </table>
+
+        <table border="1">
             <tr>
                 <td>Tilt Left/Right [gamma]</td>
-                <td id="doTiltLR">No Tilt</td>
-            </tr>
-            <tr>
                 <td>Tilt Front/Back [beta]</td>
-                <td id="doTiltFB">No Tilt</td>
+                <td>Direction [alpha]</td>
             </tr>
             <tr>
-                <td>Direction [alpha]</td>
+                <td id="doTiltLR">No Tilt</td>
+                <td id="doTiltFB">No Tilt</td>
                 <td id="doDirection">No Tilt</td>
             </tr>
-            <tr>
-                <td>Pose Vector</td>
-                <td id="orSen">No Pose Sensor</td>
-            </tr>
-            <tr>
-                <td>interval (ms)</td>
-                <td id="moInterval">Infinity</td>
-            </tr>
         </table>
-        
+
         <div class="container" id="logoContainer">
             <img src="camera.png" id="imgLogo">
         </div>
-        <!--<input type="button" id="export" value="output" />-->
-
-        <!--<p id="RotSequence">I'm Here</p>
-        <br />
-        <p id="AccSequence">I'm Here too</p>-->
-
         <br />
         <h1> Sensor Data Collection : <span>Network State</span></h1>
         <p> Current Network Connection Type is <b id="networkType">not available</b>.</p>

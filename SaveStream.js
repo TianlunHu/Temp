@@ -173,7 +173,7 @@ var rotVec = [];
 var OriVec = [];
 
 //----------------- Orientation Sensor -------------- //
-/*if ('DeviceOrientationEvent' in window) {
+if ('DeviceOrientationEvent' in window) {
   window.addEventListener('deviceorientation', deviceOrientationHandler, false);
 } else {
   document.getElementById('logoContainer').innerText = 'Device Orientation API not supported.';
@@ -184,13 +184,6 @@ function deviceOrientationHandler (eventData) {
   var tiltFB = eventData.beta;
   var dir = eventData.alpha;
   var info, xyz = "[t, X, Y, Z]";
-  
-  info = xyz.replace("t", Date.now());
-  info = xyz.replace("X", Math.round(tiltLR));
-  info = info.replace("Y", Math.round(tiltFB));
-  info = info.replace("Z", Math.round(dir));
-  document.getElementById('orSen').innerHTML = info;
-  OriVec.push(info);
     
   document.getElementById("doTiltLR").innerHTML = Math.round(tiltLR);
   document.getElementById("doTiltFB").innerHTML = Math.round(tiltFB);
@@ -198,13 +191,14 @@ function deviceOrientationHandler (eventData) {
 
   var logo = document.getElementById("imgLogo");
   logo.style.webkitTransform = "rotate(" + tiltLR + "deg) rotate3d(1,0,0, " + (tiltFB * -1) + "deg)";
-  logo.style.MozTransform = "rotate(" + tiltLR + "deg)";
+  logo.style.MozTransform = "rotate(" + tiltLR + "deg) rotate3d(1,0,0, " + (tiltFB * -1) + "deg)";
   logo.style.transform = "rotate(" + tiltLR + "deg) rotate3d(1,0,0, " + (tiltFB * -1) + "deg)";
-}*/
+}
 //----------------Motion Sensors (IMU) ---------------- //
 function OrientationHandler(orientation, OV, t) {
     let info, abcd = "[A, B, C, D]";
     let Q = orientation.quaternion;
+    
 
     info = abcd.replace("A", Q[0].toFixed(3));
     info = info.replace("B", Q[1].toFixed(3));
@@ -212,27 +206,6 @@ function OrientationHandler(orientation, OV, t) {
     info = info.replace("D", Q[3].toFixed(3));
     document.getElementById("orSen").innerHTML = info;
     OV.push(info);
-    
-    /*var tiltLR = orientation.gamma;
-  var tiltFB = orientation.beta;
-  var dir = orientation.alpha;
-  var info, xyz = "[t, X, Y, Z]";
-  
-  info = xyz.replace("t", t);
-  info = info.replace("X", Math.round(tiltLR));
-  info = info.replace("Y", Math.round(tiltFB));
-  info = info.replace("Z", Math.round(dir));
-  document.getElementById('orSen').innerHTML = info;
-  OV.push(info);
-    
-  document.getElementById("doTiltLR").innerHTML = Math.round(tiltLR);
-  document.getElementById("doTiltFB").innerHTML = Math.round(tiltFB);
-  document.getElementById("doDirection").innerHTML = Math.round(dir);
-*/
-    /*var logo = document.getElementById("imgLogo");
-    logo.style.webkitTransform = "rotate(" + tiltLR + "deg) rotate3d(1,0,0, " + (tiltFB * -1) + "deg)";
-    logo.style.MozTransform = "rotate(" + tiltLR + "deg)";
-    logo.style.transform = "rotate(" + tiltLR + "deg) rotate3d(1,0,0, " + (tiltFB * -1) + "deg)";*/
 }
 
 function accelerationHandler(acceleration, AV, t) {
@@ -261,7 +234,7 @@ function intervalHandler(interval) {
     document.getElementById("moInterval").innerHTML = interval;
 }
 
-if ('LinearAccelerationSensor' in window && 'Gyroscope' in window) {
+if ('LinearAccelerationSensor' in window && 'Gyroscope' in window && 'AbsoluteOrientationSensor' in window) {
     document.getElementById('moApi').innerHTML = 'Motion Sensor detected';
     let lastReadingTimestamp;
     let accelerometer = new LinearAccelerationSensor({
