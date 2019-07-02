@@ -1,5 +1,12 @@
 'use strict';
 /* globals MediaRecorder */
+const canvas = window.canvas = document.getElementById('frame');
+canvas.width = 640;
+cnavas.height = 480;
+function takeFrame() {
+    canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvs.height);
+};
+
 
 const mediaSource = new MediaSource();
 mediaSource.addEventListener('sourceopen', handleSourceOpen, false);
@@ -258,6 +265,7 @@ if ('LinearAccelerationSensor' in window && 'Gyroscope' in window && 'AbsoluteOr
 
         document.getElementById("timeStamp").innerHTML = accelerometer.timestamp;
         accelerationHandler(accelerometer, AccVec, Date.now());
+        takeFrame();
     });
 
     gyroscope.addEventListener('reading', e => rotationHandler({
