@@ -8,9 +8,8 @@ let recordedBlobs;
 let sourceBuffer;
 
 const errorMsgElement = document.querySelector('span#errorMsg');
-const recordedVideo = document.querySelector('video#recorded');
+/*const recordedVideo = document.querySelector('video#recorded');*/
 const recordButton = document.querySelector('button#record');
-
 
 recordButton.addEventListener('click', () => {
     if (recordButton.textContent === 'Start Recording') {
@@ -18,12 +17,12 @@ recordButton.addEventListener('click', () => {
     } else {
         stopRecording();
         recordButton.textContent = 'Start Recording';
-        playButton.disabled = false;
+        /*playButton.disabled = false;*/
         downloadButton.disabled = false;
     }
 });
 
-const playButton = document.querySelector('button#play');
+/*const playButton = document.querySelector('button#play');
 playButton.addEventListener('click', () => {
     const superBuffer = new Blob(recordedBlobs, {
         type: 'video/webm'
@@ -33,7 +32,7 @@ playButton.addEventListener('click', () => {
     recordedVideo.src = window.URL.createObjectURL(superBuffer);
     recordedVideo.controls = true;
     recordedVideo.play();
-});
+});*/
 
 const downloadButton = document.querySelector('button#download');
 downloadButton.addEventListener('click', () => {
@@ -120,7 +119,7 @@ function startRecording() {
 
     console.log('Created MediaRecorder', mediaRecorder, 'with options', options);
     recordButton.textContent = 'Stop Recording';
-    playButton.disabled = true;
+    /*playButton.disabled = true;*/
     downloadButton.disabled = true;
     mediaRecorder.onstop = (event) => {
         console.log('Recorder stopped: ', event);
