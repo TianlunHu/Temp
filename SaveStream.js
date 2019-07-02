@@ -51,11 +51,11 @@ downloadButton.addEventListener('click', () => {
         document.body.removeChild(a);
         window.URL.revokeObjectURL(url);
     }, 100);
-    
+
     const R = rotVec;
     const A = AccVec;
     const O = OriVec;
-    
+
     const rot = new Blob(R, {
         type: "text/plain;charset=utf-8"
     });
@@ -68,7 +68,7 @@ downloadButton.addEventListener('click', () => {
         type: "text/plain;charset=utf-8"
     });
     saveAs(ori, "orientation.txt");
-    
+
 });
 
 function handleSourceOpen(event) {
@@ -202,12 +202,18 @@ function deviceOrientationHandler (eventData) {
   logo.style.transform = "rotate(" + tiltLR + "deg) rotate3d(1,0,0, " + (tiltFB * -1) + "deg)";
 }*/
 //----------------Motion Sensors (IMU) ---------------- //
-function deviceOrientationHandler(orientation, OV, t) {
-  let info = '[a, b, c,d]';
-  let Q = orientation.quaternion;
-  OV.push(info);
-  document.getElementById('orSen').innerHTML = Q;
-  /*var tiltLR = orientation.gamma;
+function OrientationHandler(orientation, OV, t) {
+    let info, abcd = '[A, B, C, D]';
+    let Q = [orientation.quaternion];
+
+    info = abcd.replace("A", Q[0].toFixed(3));
+    info = info.replace("B", Q[1].toFixed(3));
+    info = info.replace("C", Q[2].toFixed(3));
+    info = info.replace("D", Q[3].toFixed(3));
+    document.getElementById('orSen').innerHTML = info;
+    OV.push(info);
+    
+    /*var tiltLR = orientation.gamma;
   var tiltFB = orientation.beta;
   var dir = orientation.alpha;
   var info, xyz = "[t, X, Y, Z]";
@@ -223,10 +229,10 @@ function deviceOrientationHandler(orientation, OV, t) {
   document.getElementById("doTiltFB").innerHTML = Math.round(tiltFB);
   document.getElementById("doDirection").innerHTML = Math.round(dir);
 */
-  /*var logo = document.getElementById("imgLogo");
-  logo.style.webkitTransform = "rotate(" + tiltLR + "deg) rotate3d(1,0,0, " + (tiltFB * -1) + "deg)";
-  logo.style.MozTransform = "rotate(" + tiltLR + "deg)";
-  logo.style.transform = "rotate(" + tiltLR + "deg) rotate3d(1,0,0, " + (tiltFB * -1) + "deg)";*/
+    /*var logo = document.getElementById("imgLogo");
+    logo.style.webkitTransform = "rotate(" + tiltLR + "deg) rotate3d(1,0,0, " + (tiltFB * -1) + "deg)";
+    logo.style.MozTransform = "rotate(" + tiltLR + "deg)";
+    logo.style.transform = "rotate(" + tiltLR + "deg) rotate3d(1,0,0, " + (tiltFB * -1) + "deg)";*/
 }
 
 function accelerationHandler(acceleration, AV, t) {
@@ -287,13 +293,13 @@ if ('LinearAccelerationSensor' in window && 'Gyroscope' in window) {
         beta: gyroscope.y,
         gamma: gyroscope.z
     }, rotVec, Date.now()));
-    
-    orientator.addEventListener('reading', e => deviceOrientationHandler(orientator, OriVec, orientator.timestamp));
-    
+
+    orientator.addEventListener('reading', e => OrientationHandler(orientator, OriVec, orientator.timestamp));
+
     accelerometer.start();
     gyroscope.start();
     orientator.start();
-    
+
 } else if ('DeviceMotionEvent' in window) {
     document.getElementById('moApi').innerHTML = 'Device Motion Event';
 
