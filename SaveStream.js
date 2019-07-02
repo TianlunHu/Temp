@@ -1,6 +1,6 @@
 'use strict';
 /* globals MediaRecorder */
-const gumVideo;
+var gumVideo;
 const canvas = window.canvas = document.getElementById('frame');
 canvas.width = 640;
 canvas.height = 480;
