@@ -1,12 +1,5 @@
 'use strict';
 /* globals MediaRecorder */
-var gumVideo = document.querySelector('video#gum');
-var canvas = window.canvas = document.querySelector('canvas#frame');
-canvas.width = 640;
-canvas.height = 480;
-function takeFrame() {
-    canvas.getContext('2d').drawImage(gumVideo, 0, 0, canvas.width, canvas.height);
-};
 
 const mediaSource = new MediaSource();
 mediaSource.addEventListener('sourceopen', handleSourceOpen, false);
@@ -140,6 +133,18 @@ function stopRecording() {
     mediaRecorder.stop();
     console.log('Recorded Blobs: ', recordedBlobs);
 }
+
+
+const gumVideo = document.querySelector('video#gum');
+const canvas = window.canvas = document.querySelector('canvas#frame');
+canvas.width = 640;
+canvas.height = 480;
+
+function takeFrame() {
+    canvas.width = gumVideo.videoWidth;
+    canvas.height = gumVideo.videoHeight;
+    canvas.getContext('2d').drawImage(gumVideo, 0, 0, canvas.width, canvas.height);
+};
 
 function handleSuccess(stream) {
     recordButton.disabled = false;
