@@ -270,7 +270,7 @@ if ('LinearAccelerationSensor' in window && 'Gyroscope' in window && 'AbsoluteOr
 
         document.getElementById("timeStamp").innerHTML = accelerometer.timestamp;
         accelerationHandler(accelerometer, AccVec, Date.now());
-        
+        takeFrame();
     });
 
     gyroscope.addEventListener('reading', e => rotationHandler({
@@ -284,7 +284,7 @@ if ('LinearAccelerationSensor' in window && 'Gyroscope' in window && 'AbsoluteOr
     accelerometer.start();
     gyroscope.start();
     orientator.start();
-    takeFrame();
+   
 } else if ('DeviceMotionEvent' in window) {
     document.getElementById('moApi').innerHTML = 'Device Motion Event';
 
