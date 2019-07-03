@@ -139,6 +139,8 @@ const gumVideo = document.querySelector('video#gum');
 const canvas = window.canvas = document.querySelector('canvas#frame');
 canvas.width = 640;
 canvas.height = 480;
+const button = document.querySelector('button#takeP');
+button.onclick = takeFrame();
 
 function takeFrame() {
     canvas.width = gumVideo.videoWidth;
@@ -270,7 +272,7 @@ if ('LinearAccelerationSensor' in window && 'Gyroscope' in window && 'AbsoluteOr
 
         document.getElementById("timeStamp").innerHTML = accelerometer.timestamp;
         accelerationHandler(accelerometer, AccVec, Date.now());
-        takeFrame();
+        
     });
 
     gyroscope.addEventListener('reading', e => rotationHandler({
@@ -284,6 +286,7 @@ if ('LinearAccelerationSensor' in window && 'Gyroscope' in window && 'AbsoluteOr
     accelerometer.start();
     gyroscope.start();
     orientator.start();
+    
    
 } else if ('DeviceMotionEvent' in window) {
     document.getElementById('moApi').innerHTML = 'Device Motion Event';
