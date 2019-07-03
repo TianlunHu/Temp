@@ -1,11 +1,11 @@
 'use strict';
 /* globals MediaRecorder */
-var gumVideo;
-const canvas = window.canvas = document.getElementById('frame');
+const gumVideo = document.querySelector('video#gum');
+const canvas = window.canvas = document.querySelector('canvas#frame');
 canvas.width = 640;
 canvas.height = 480;
 function takeFrame() {
-    canvas.getContext('2d').drawImage(gumVideo, 0, 0, canvas.width, canvs.height);
+    canvas.getContext('2d').drawImage(gumVideo, 0, 0, canvas.width, canvas.height);
 };
 
 const mediaSource = new MediaSource();
@@ -146,7 +146,7 @@ function handleSuccess(stream) {
     console.log('getUserMedia() got stream:', stream);
     window.stream = stream;
 
-    gumVideo = document.querySelector('video#gum');
+    /*const gumVideo = document.querySelector('video#gum');*/
     gumVideo.srcObject = stream;
 }
 
