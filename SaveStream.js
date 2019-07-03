@@ -1,7 +1,7 @@
 'use strict';
 /* globals MediaRecorder */
-const gumVideo = document.querySelector('video#gum');
-const canvas = window.canvas = document.querySelector('canvas#frame');
+var gumVideo = document.querySelector('video#gum');
+var canvas = window.canvas = document.querySelector('canvas#frame');
 canvas.width = 640;
 canvas.height = 480;
 function takeFrame() {
